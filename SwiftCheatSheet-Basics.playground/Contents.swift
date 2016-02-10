@@ -1,7 +1,7 @@
 /*:
-# Swift Cheat Sheet Part I
+# Swift Cheat Sheet -- Basics
 
-Swift has some nice syntax as you can see in this cheat sheet, but it doesn't get really interesting until you get to Part 2.
+This cheat sheet covers the basics. Swift has some nice syntax as you'll see below, but it doesn't get really interesting until you get to the companion cheat sheet.
 
 ## Constants, Variables and Basic Types
 */
@@ -152,13 +152,18 @@ Instead of increment and decrement, they want you to just use += and -=, as I di
 
 ### Binary Operators
 
-Swift has all the usual binary arithmetic operators: plus, minus, times, divided by, mod (+, -, *, /, %).
+Swift has all the usual binary arithmetic operators: plus, minus, times, divided by, remainder (+, -, *, /, %) &mdash; but watch out, remainder is really remainder, not modulo: */
 
-It has the usual binary logic operators: logical and, logical or,
+let minusFour = -24 % 10
+
+/*:
+You should compare this with C's modulo operator, which in this case gives would have given you 6.
+
+It has the usual binary logic operators: logical and, logical or (&&, ||)
 
 There is no exponentiation operator (**).
 
-There is a bitwise or: */
+There is a bitwise or (^): */
 
 let twoFiftyFive = eightyFive ^ oneSeventy // 0b11111111
 
@@ -259,6 +264,22 @@ Now nearbyStops has four elements.
 
 If nearbyStops had been defined with a let instead of var, this would have been an error.
 
+## Enumerations
+
+Swift has very nice enumerations. Here is an example declaration of an enumeration:
+
+*/
+
+enum ClockPhase {
+    case High // the phase after a low-to-high transition -- usually known as the Tock phase
+    case Low // the phase after a high-to-low transition -- usually known as the Tick phase
+    case Unstable // during the transition
+}
+
+/*:
+
+By "very nice," I mean not only do they add to readibility, but they also feed the switch statement in a non-error-prone way. See below.
+
 ## Control Flow
 
 ### Loops
@@ -281,6 +302,55 @@ for stop in nearbyStops {
 
 /*:
 
+The old school C-like version of the for loop is also supported:
+
+*/
+
+for var i: Int = nearbyStops.count - 1; i >= 0; --i {
+    print(nearbyStops[i]) // runs through the stops array backwards
+}
+
+/*:
+
+### While Do and Do While
+
+Swift has both of these except to emphasize that the second one always iterates at least once, they called it "repeat-while."
+
+*/
+
+while nearbyStops.count > 0 {
+    nearbyStops.removeLast() // removes all the stops
+}
+
+repeat {
+    nearbyStops.append("Lafayette")
+} while nearbyStops.count < 4
+
+/*:
+
+### Switch Statements (aka case statements)
+
+The code below illustrates one of the main uses for the enumeration declared above:
+
+*/
+
+let phase = ClockPhase.High
+
+switch phase {
+case ClockPhase.High:
+    // transition high-to-low
+    print("transitioning high to low") // this is the one that will print
+case ClockPhase.Low:
+    // transition low-to-high
+    print("transitioning low to high")
+case ClockPhase.Unstable:
+    print("oh my, this should hever happen")
+}
+
+/*:
+
+Now nearbyStops contains "Lafayette" four times.
+
 ## Sets
 
 Making a set literal looks almost the same as making an array literal:
@@ -289,9 +359,9 @@ Making a set literal looks almost the same as making an array literal:
     
 var setOfStops: Set = ["Rockridge", "Orinda", "Lafayette", "Walnut Creek", "Pleasant Hill"] // five members
 
-setOfStops.remove("Pleasant Hill") // after the remove, setOfStops only has four members
+setOfStops.remove("Pleasant Hill") // after the remove, setOfStops only has four members -- for your convenience this method returns whatever was removed
 
-setOfStops.remove("Pleasant Hill") // you can remove it again, but it has no effect and returns nil
+setOfStops.remove("Pleasant Hill") // you can try removing it again, but it has no effect and the method returns nil
 
 setOfStops.insert("MacArthur")
 
@@ -323,5 +393,7 @@ for name in allCourseNames {
 var coursesCount: Int = courses.count // get the number of key-value pairs in courses
 
 /*:
+
+Well, that's all the basics. See the companion cheat sheet for Swift's more advanced features.
 
 */
