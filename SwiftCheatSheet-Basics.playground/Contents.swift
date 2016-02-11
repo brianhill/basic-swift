@@ -143,8 +143,7 @@ let ten = 10
 let plusTen = +ten
 let minusTen = -ten
 let notTrue = !true
-let eightyFive = UInt8(85) // 0b01010101
-let oneSeventy: UInt8 = ~eightyFive // 0b01010101
+let oneSeventy: UInt8 = ~UInt8(85) // ~0b01010101 becomes 0b10101010
 
 /*:
 
@@ -152,20 +151,27 @@ Instead of increment and decrement, they want you to just use += and -=, as I di
 
 ### Binary Operators
 
-Swift has all the usual binary arithmetic operators: plus, minus, times, divided by, remainder (+, -, *, /, %) &mdash; but watch out, remainder is really remainder, not modulo: */
+Swift has all the usual binary arithmetic operators: plus, minus, times, divided by, remainder (+, -, *, /, %) &mdash; but as in other languages, remainder with negative numbers can be kind of surprising: */
 
 let minusFour = -24 % 10
 
 /*:
-You should compare this with C's modulo operator, which in this case gives would have given you 6.
 
 It has the usual binary logic operators: logical and, logical or (&&, ||)
 
-There is no exponentiation operator (**).
+There is no exponentiation operator (**). Use the function pow(num, power).
 
-There is a bitwise or (^): */
+*/
 
-let twoFiftyFive = eightyFive ^ oneSeventy // 0b11111111
+let sixtyFour = pow(4.0, 3.0)
+
+/*:
+
+There is a bitwise or (^):
+
+*/
+
+let twoFiftyFive = UInt8(85) ^ oneSeventy // 0b01010101 ^ 0b11111111 becomes 0b11111111
 
 /*: Swift has the usual left shift and right shift operators (<< and >>): */
 
@@ -227,11 +233,17 @@ valueOrDefault = value ?? 42
 
 Swift has the usual assigment and mutating assignment operators: assignment, assignment with addition, assignment with subtraction (=, +=, -=).
 
-It also has some logical mutating assignment operators: assignment with bitwise or, assignment with bitwise (|=, &=).
+It also has some bitwise mutating assignment operators: assignment with bitwise or, assignment with bitwise and (^=, &=).
 
-It also has some bitwise mutating assignment operators: assignment with bitwise or (^=, &=).
+*/
 
-Does Swift have assignment with logical or or assignment with logical and (||=, &&=)? Nope.
+var fifteen: UInt8 = 0b1111
+
+fifteen |= 0b11110000 // 0b1111 | 0b11110000 gives 0b11111111, e.g., 255.
+
+/*:
+
+Does Swift have mutating assignment with logical or or mutating assignment with logical and (||=, &&=)? Nope.
 
 ## Arrays and Ranges
 
