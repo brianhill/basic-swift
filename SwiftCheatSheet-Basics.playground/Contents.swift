@@ -80,11 +80,11 @@ Any language that doesn't support Unicode by default (like C++ and Python 2.x) p
 Like Python, Swift allows for tuples which are used for grouping and returning multiple pieces of data:
 */
 
-let boeingModelNumberAndName = (787, "Dreamliner")
+let boeingModelNumberAndName = (787, "Boeing Dreamliner")
 let modelNumber = boeingModelNumberAndName.0
 let name = boeingModelNumberAndName.1
 
-let airbusModelNumberAndName = (modelNumber:320, name:"Airbus 320")
+let airbusModelNumberAndName = (modelNumber:320, name:"Airbus A320")
 let airbusModelNumber = airbusModelNumberAndName.modelNumber
 let airbusName = airbusModelNumberAndName.name
 
@@ -94,15 +94,19 @@ As you can see from the above examples, if the components of the tuple are not n
 
 ## Type Aliases
 
-Apple makes heavy use of type aliases in its frameworks. For example, CGRect is a type alias for a struct with four CGFloats. It isn't really your business whether a CGFloat is a Float or a Double, and on different Apple platforms, it may be different. Swift has the typealias feature and Apple uses it to insulate your code from the platform. Here is one way of making a CGRect:
+Apple makes heavy use of type aliases in its frameworks. For example, CGRect is a type alias for a struct with four CGFloats. It isn't really your business whether a CGFloat is a Float or a Double, and on different Apple platforms, it may be different. Swift has the typealias feature and Apple uses it to insulate your code from the platform. First an import:
 */
 
 import CoreGraphics
 
+/*:
+Up until this point in this playground, we have only been using things declared as part of the Swift language. After this import, we have access to all sorts of type aliases, structs, classes and functions that Apple declared in its CoreGraphics library. So we have CGFloat (a typealias) and CGPoint and CGRect (structs) and a bunch of ways of initializing those structs.
+*/
+
 var whole27InchScreen = CGRect(x:0.0, y:0.0, width:1440.0, height:2560.0)
 
 /*:
-In the above declaration, the type CGRect could have been omitted because it can be infered from the return type of the function CGRectMake().
+In the above declaration, whole27InchScreen did not have to be typed CGRect because the compiler inferred that from the structure initializer.
 
 ### Defining New Type Aliases
 
@@ -120,25 +124,32 @@ What should the return type of a function that finds the position of a substring
 
 var position: Int?
 
-/*: Your code that finds the position might start by setting position = nil. */
+/*:
+Your code that finds the position might start by setting position = nil.
+*/
 
 position = nil
 
-/*: Only if it finds the substring might it then set it and return it. */
+/*:
+Only if it finds the substring might it then set it and return it.
+*/
 
 position = 3
 
-/*: No integer is equal to nil. It represents the absence of an integer. Optionals and nil are available for any data type. 
+/*:
+No integer is equal to nil. It represents the absence of an integer. Optionals and nil are available for any data type.
 
 ### Unwrapping Optionals
 
 If you know that position exists, you can unwrap it as follows:
-
 */
 
 var definitelyAPosition = position!
 
-/*: This test-then-assign idiom is so common, the language has a shorthand for it:
+/*:
+If position were nil when the previous assignment was done, it would have immediately caused an error. If it had not, then who knows when some later use of definitelyAPosition would finally bomb out. Swift is doing you a huge favor by immediately bombing out at the point where the error is first known. I liken it to Bugs Bunny road-runner hour. In some languages a program can have run off the cliff and yet be hanging in the air for a while. It can be very hard to find when a problem first occurred if the language lets the program execute for a while until it finally becomes too problematic.
+
+The unwrap-only-if-non-nil-and-then-do-something pattern is so common that the language has a construction for exactly that:
 */
 
 if var oneBasedPosition = position {
