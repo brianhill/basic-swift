@@ -7,7 +7,7 @@ This cheat sheet covers the basics. Swift has some nice syntax as you'll see bel
 */
 
 let pi = 3.14159
-var radius = 5.0
+var radius = 5.5
 let avogadro = 6.02e23
 
 /*:
@@ -34,18 +34,26 @@ Literal constants without decimal points are of type Int. Sometimes it is conven
 in binary, octal and hexadecimal. All of these give the same integer:
 */
 
-let sixtyFiveDecimal = 65
+let sixtyFive = 65
 let sixtyFiveBinary = 0b1000001
 let sixtyFiveOctal = 0o101
 let sixtyFiveHex = 0x41
 
 /*:
-### Range: Int32 vs. Int64
+### Precision: Int32 vs. Int64
 
-Most of the time you should let the compiler decide what precision to use. However, if you have a reason for making an Int of a particular range, you can:
+Most of the time you should let the compiler decide what precision to use. However, if you have a reason for making an Int of a particular precision (aka width), you can:
 */
 
 let sixtyFiveAsInt8 = Int8(65)
+
+/*:
+### Casts
+
+You will often find yourself needing to cast from an integer type to a floating-point type. Here is an example of such a cast:
+*/
+
+let sixtyFiveAsDouble = Double(sixtyFive)
 
 /*:
 ### Booleans
@@ -72,9 +80,18 @@ Any language that doesn't support Unicode by default (like C++ and Python 2.x) p
 Like Python, Swift allows for tuples which are used for grouping and returning multiple pieces of data:
 */
 
-let modelNumberAndName = (787, "Dreamliner")
+let boeingModelNumberAndName = (787, "Dreamliner")
+let modelNumber = boeingModelNumberAndName.0
+let name = boeingModelNumberAndName.1
+
+let airbusModelNumberAndName = (modelNumber:320, name:"Airbus 320")
+let airbusModelNumber = airbusModelNumberAndName.modelNumber
+let airbusName = airbusModelNumberAndName.name
 
 /*:
+
+As you can see from the above examples, if the components of the tuple are not named, then they can be access by number.
+
 ## Type Aliases
 
 Apple makes heavy use of type aliases in its frameworks. For example, CGRect is a type alias for a struct with four CGFloats. It isn't really your business whether a CGFloat is a Float or a Double, and on different Apple platforms, it may be different. Swift has the typealias feature and Apple uses it to insulate your code from the platform. Here is one way of making a CGRect:
