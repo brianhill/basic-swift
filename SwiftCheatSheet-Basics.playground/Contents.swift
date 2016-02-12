@@ -318,7 +318,7 @@ enum ClockPhase {
 
 /*:
 
-By "very nice," I mean not only do they add to readibility, but they also feed the switch statement in a non-error-prone way. See below.
+By "very nice," I mean not only do they add to readability, but they also feed the switch statement in a non-error-prone way. See below.
 
 ## Control Flow
 
@@ -351,11 +351,9 @@ for var i: Int = nearbyStops.count - 1; i >= 0; --i {
 }
 
 /*:
-
 ### While Do and Do While
 
 Swift has both of these except to emphasize that the second one always iterates at least once, they called it "repeat-while."
-
 */
 
 while nearbyStops.count > 0 {
@@ -363,15 +361,15 @@ while nearbyStops.count > 0 {
 }
 
 repeat {
-    nearbyStops.append("Lafayette")
+    nearbyStops.append("Lafayette") // repeatedly append "Lafayette"
 } while nearbyStops.count < 4
 
 /*:
+Now nearbyStops contains "Lafayette" four times.
 
 ### Switch Statements (aka case statements)
 
 The code below illustrates one of the main uses for the enumeration declared above:
-
 */
 
 let phase = ClockPhase.High
@@ -388,13 +386,11 @@ case ClockPhase.Unstable:
 }
 
 /*:
-
-Now nearbyStops contains "Lafayette" four times.
+Suppose we had left out ClockPhase.Unstable? The compiler would have warned us that your switch statment is not exhaustive! It is all too common an error for someone to add a case to an enumeration and not remember to handle that case everywhere. It is a beautiful thing that Swift catches this kind of error at compile time.
 
 ## Sets
 
 Making a set literal looks almost the same as making an array literal:
-
 */
     
 var setOfStops: Set = ["Rockridge", "Orinda", "Lafayette", "Walnut Creek", "Pleasant Hill"] // five members
