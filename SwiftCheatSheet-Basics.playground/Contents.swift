@@ -80,13 +80,13 @@ Any language that doesn't support Unicode by default (like C++ and Python 2.x) p
 Like Python, Swift allows for tuples which are used for grouping and returning multiple pieces of data:
 */
 
-let boeingModelNumberAndName = (787, "Boeing Dreamliner")
-let modelNumber = boeingModelNumberAndName.0
-let name = boeingModelNumberAndName.1
+let dreamlinerModelNumberAndName = (787, "Boeing Dreamliner")
+let dreamlinerModelNumber = dreamlinerModelNumberAndName.0
+let dreamlinerName = dreamlinerModelNumberAndName.1
 
-let airbusModelNumberAndName = (modelNumber:320, name:"Airbus A320")
-let airbusModelNumber = airbusModelNumberAndName.modelNumber
-let airbusName = airbusModelNumberAndName.name
+let a320ModelNumberAndName = (modelNumber:320, name:"Airbus A320")
+let a320ModelNumber = a320ModelNumberAndName.modelNumber
+let a320Name = a320ModelNumberAndName.name
 
 /*:
 
@@ -322,10 +322,25 @@ By "very nice," I mean not only do they add to readability, but they also feed t
 
 ## Control Flow
 
+### If/Else
+
+Swift has C-style if and else, but it doesn't have the elif keyword, so you have to write out the else if:
+*/
+
+let modelNumber = 900
+
+if modelNumber == dreamlinerModelNumber {
+    print("Assembled in Everett")
+} else if modelNumber == a320ModelNumber {
+    print("Assembled in Toulouse")
+} else {
+    print("Assembly Point Unknown")
+}
+
+/*:
 ### Loops
 
 With ranges, we now have one way of constructing loops:
-
 */
 
 for i in 0..<4 {
@@ -333,17 +348,15 @@ for i in 0..<4 {
 }
 
 /*:
-
-A better way of doing this loop is */
+A better way of doing this loop is
+*/
 
 for stop in nearbyStops {
     print(stop)
 }
 
 /*:
-
-The old school C-like version of the for loop is also supported:
-
+The old school C-like version of the for loop is also supported (but note they are removing constructions like --i, i--, ++i, and i-- as of Swift 2.2):
 */
 
 for var i: Int = nearbyStops.count - 1; i >= 0; i -= 1 {
