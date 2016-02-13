@@ -346,7 +346,7 @@ The old school C-like version of the for loop is also supported:
 
 */
 
-for var i: Int = nearbyStops.count - 1; i >= 0; --i {
+for var i: Int = nearbyStops.count - 1; i >= 0; i -= 1 {
     print(nearbyStops[i]) // runs through the stops array backwards
 }
 
