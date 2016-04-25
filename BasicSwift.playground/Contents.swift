@@ -1,7 +1,22 @@
 /*:
-# Swift Cheat Sheet -- Basics
-
-This cheat sheet covers the basics. Swift has some nice syntax as you'll see below, but it doesn't get really interesting until you get to the companion cheat sheet.
+# A Playground Summarizing Current, Basic Swift
+ 
+CS 190 [Course Home Page]( http://physics.stmarys-ca.edu/classes/CS190_S16/index.html )
+ 
+My [St. Mary's Home Page]( http://physics.stmarys-ca.edu/lecturers/brianrhill/index.html )
+ 
+This playground was most recently updated using Xcode 7.3 and is compatible with Swift 2.2.
+ 
+This playground is commented with markdown. If the playground doesn't look pretty in Xcode, find "Show Rendered Markup" in the "Editor" menu and toggle rendering on. Conversely, if you are seeing the rendered markup, but you want to see or edit the raw file, in the same menu, find "Show Raw Markup" and toggle rendering off.
+ 
+This playground includes variables, typealiases, optionals, operators, tuples, enums, control flow, and the basic features of arrays, sets and dictionaries.
+ 
+## Annotated Bibliography
+ 
+ * Apple's book on [The Swift Programming Language (Swift 2.2)]( https://itunes.apple.com/us/book/the-swift-programming-language/id881256329?mt=11 ).
+ * My summary of [Intermediate Swift]( http://github.com/brianhill/intermediate-swift ).
+ 
+ _The contents of this repository is licensed under the_ [Creative Commons Attribution-ShareAlike License](http://creativecommons.org/licenses/by-sa/3.0/).
 
 ## Constants, Variables and Basic Types
 */
@@ -338,7 +353,7 @@ if modelNumber == dreamlinerModelNumber {
 }
 
 /*:
-### Loops
+### For Loops
 
 With ranges, we now have one way of constructing loops:
 */
@@ -356,14 +371,15 @@ for stop in nearbyStops {
 }
 
 /*:
-The old school C-like version of the for loop is also supported (but note they are removing constructions like --i, i--, ++i, and i-- as of Swift 2.2):
-*/
+The C-like version of the for loop is supported as of Swift 2.2, but it is deprecated, so you might aw well get used to not having it.
 
+```
+// This is deprecated:
 for var i: Int = nearbyStops.count - 1; i >= 0; i -= 1 {
     print(nearbyStops[i]) // runs through the stops array backwards
 }
+```
 
-/*:
 ### While Do and Do While
 
 Swift has both of these except to emphasize that the second one always iterates at least once, they called it "repeat-while."
@@ -399,8 +415,8 @@ case ClockPhase.Unstable:
 }
 
 /*:
-Suppose we had left out ClockPhase.Unstable? The compiler would have warned us that your switch statment is not exhaustive! It is all too common an error for someone to add a case to an enumeration and not remember to handle that case everywhere. It is a beautiful thing that Swift catches this kind of error at compile time.
-
+Suppose we had left out ClockPhase.Unstable. The very nice thing about Swift's enumerations is that the compiler would have warned us that the switch statement is not exhaustive! It is all too common an error for someone to add a case to an enumeration and not remember to handle that case everywhere.
+ 
 ## Sets
 
 Making a set literal looks almost the same as making an array literal:
